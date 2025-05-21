@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bolsa de Trabajo - Encuentra tu próxima oportunidad{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row align-items-center py-5">
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold">Encuentra tu próxima oportunidad laboral</h1>
+            <p class="lead">Tu plataforma para conectar con las mejores vacantes y reclutadores.</p>
+            <div class="mt-4">
+                <a href="{% url 'listar_vacantes' %}" class="btn btn-primary btn-lg">Buscar Vacantes</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'registro_interesado' %}" class="btn btn-outline-primary btn-lg ms-2">Registrarse</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'img/hero-image.svg' %}" alt="Ilustración de búsqueda de empleo" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Vacantes Destacadas</h2>
+        </div>
+        
+        {% if vacantes_destacadas %}
+            {% for vacante in vacantes_destacadas %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ vacante.titulo }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ vacante.secretaria.nombre }}</h6>
+                            <p class="card-text small">{{ vacante.descripcion|truncatechars:100 }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info text-dark">{{ vacante.get_tipo_empleo_display }}</span>
+                                <a href="{% url 'detalle_vacante' vacante.id %}" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No hay vacantes destacadas en este momento.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row py-5 bg-light rounded-3">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">¿Por qué usar nuestra Bolsa de Trabajo?</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <i class="bi bi-search text-primary" style="font-size: 2.5rem;"></i>
+                <h4 class="mt-3">Búsqueda Inteligente</h4>
+                <p>Encuentra las vacantes que mejor se adapten a tu perfil profesional.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <i class="bi bi-briefcase text-primary" style="font-size: 2.5rem;"></i>
+                <h4 class="mt-3">Vacantes de Calidad</h4>
+                <p>Todas las vacantes son verificadas para asegurar su legitimidad.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <i class="bi bi-person-check text-primary" style="font-size: 2.5rem;"></i>
+                <h4 class="mt-3">Proceso Simplificado</h4>
+                <p>Postúlate con un solo clic y gestiona todas tus aplicaciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

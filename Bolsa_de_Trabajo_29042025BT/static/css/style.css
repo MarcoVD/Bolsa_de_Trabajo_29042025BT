@@ -1,0 +1,34 @@
+/* static/css/style.css */
+
+/* Estilos generales */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Estilos para las tarjetas de vacantes */
+.vacancy-card {
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.vacancy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Estilos para botones */
+.btn {
+    border-radius: 8px;
+}
+
+/* Estilos para formularios */
+.form-control, .form-select {
+    border-radius: 8px;
+}
